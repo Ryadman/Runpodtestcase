@@ -1,5 +1,7 @@
 import base64
 import io
+import os
+
 import torch
 from diffusers import FluxPipeline
 import runpod
@@ -7,6 +9,7 @@ import runpod
 pipe = FluxPipeline.from_pretrained(
     "black-forest-labs/FLUX.1-dev",
     torch_dtype=torch.bfloat16,
+    cache_dir=os.environ.get("MODEL_CACHE_DIR", "/runpod-volume/model-cache"),
 )
 pipe.to("cuda")
 
