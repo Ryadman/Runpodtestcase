@@ -11,14 +11,15 @@ pipe = FluxPipeline.from_pretrained(
     torch_dtype=torch.bfloat16,
     cache_dir=os.environ.get("MODEL_CACHE_DIR", "/runpod-volume/model-cache"),
 )
-pipe.enable_model_cpu_offload()
+pipe.to("cuda")
 
 
 def handler(job):
     job_input = job["input"]
     prompt = job_input.get("prompt")
+    num_inference_steps = int(job_input.get("num_inference_steps", 25))
 
-    image = pipe(prompt=prompt).images[0]
+    image = pipe(prompt=prompt, num_inference_steps=num_inference_steps).images[0]
 
     buffer = io.BytesIO()
     image.save(buffer, format="PNG")
