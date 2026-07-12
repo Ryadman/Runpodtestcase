@@ -11,7 +11,7 @@ pipe = FluxPipeline.from_pretrained(
     torch_dtype=torch.bfloat16,
     cache_dir=os.environ.get("MODEL_CACHE_DIR", "/runpod-volume/model-cache"),
 )
-pipe.to("cuda")
+pipe.enable_model_cpu_offload()
 
 
 def handler(job):
