@@ -1,1 +1,3 @@
-Set `RUNPOD_ENDPOINT_ID` and `RUNPOD_API_KEY` as environment variables, then:
+gradio
+requests
+pillow
