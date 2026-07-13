@@ -25,7 +25,6 @@ def generate(prompt, history):
     response.raise_for_status()
     job_id = response.json()["id"]
 
-    elapsed = 0
     for _ in range(60):
         status_response = requests.get(f"{STATUS_URL}/{job_id}", headers=HEADERS, timeout=30)
         status_response.raise_for_status()
@@ -48,7 +47,6 @@ def generate(prompt, history):
             return f"⚠️ Job failed: {data}"
 
         time.sleep(5)
-        elapsed += 5
 
     return "⏱️ Timed out waiting for the result."
 
@@ -70,7 +68,7 @@ with gr.Blocks(theme=THEME, css=CUSTOM_CSS, title="FLUX.1-dev Image Generator") 
         Type a prompt, hit enter, and watch the image get generated live —
         powered by **FLUX.1-dev** running on a **RunPod Serverless GPU endpoint**.
 
-        *Generation typically takes 1–4 minutes depending on GPU availability.*
+        *Generation typically takes under a minute, depending on GPU availability.*
         """
     )
 
