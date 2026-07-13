@@ -18,7 +18,7 @@ This project deploys FLUX.1-dev on a RunPod Serverless GPU endpoint and puts a c
 4. Attach a network volume (so the model gets cached instead of re-downloaded every time) and set two environment variables:
    - `HF_TOKEN` - your Hugging Face token. FLUX.1-dev is gated, so you'll need to accept the license on the model page first.
    - `MODEL_CACHE_DIR` = `/runpod-volume/model-cache`
-5. Pick a GPU with enough VRAM - 48GB worked well in testing.
+5. Pick a GPU with enough VRAM - 48GB worked well in testing as the 24gb mostly did provide out of memory or not available.
 6. Deploy, and give the first request a few minutes since it has to pull the model down.
 
-## Running the UI on local machine
+## Running the UI on your machine
